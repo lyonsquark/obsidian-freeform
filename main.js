@@ -45,6 +45,17 @@ globalThis.display = function display(val) {
   inspector.fulfilled(val);
 }
 
+// Function to load a script
+globalThis.loadScript = async function loadScript(filePath) {
+    const {vault: v} = window.top.app;
+    const vaultPath = v.getAbstractFileByPath(filePath);
+    if ( vaultPath == null ) display(\`Error: Cannot find script \${filePath}\`);
+    const fileContent = await v.read(vaultPath);
+    const encodedContent = btoa(unescape(encodeURIComponent(fileContent)));
+    const module = await import(\`data:text/javascript;base64,\${encodedContent}\`);
+    return module;
+  }
+
 globalThis.width = window.innerWidth;
 
 const resizeObserver = new ResizeObserver((entries) => {

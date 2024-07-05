@@ -161,6 +161,17 @@ Note that some stylesheets you import this way will have relative references
 to images or they might import other stylesheets via `@import`, and those things
 won't work.
 
+#### Loading a script from the vault
+
+If you have a javascript file in your vault, you can load it with `loadScript(relativePathOfScript)`. For example, 
+
+    ```freeform
+    const mylib = await loadScript("path/to/myScript.js");
+    mylib.go()
+    ```
+
+This feature will allow you to share code and you can use a better editor for the code itself. 
+
 ### Notes
 
 - There is a `width` variable, much like [Observable's](https://observablehq.com/framework/javascript#width), but
